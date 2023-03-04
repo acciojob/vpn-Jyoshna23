@@ -31,7 +31,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 //        }
 
 
-            if(user.getConnected()){
+            if(user.getMaskedIp()!=null){
                 throw new Exception("Already connected");
             }else if(user.getOriginalCountry().getCountryName().toString().equalsIgnoreCase(countryName)){
             return user;
