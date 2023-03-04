@@ -23,19 +23,13 @@ public class ConnectionServiceImpl implements ConnectionService {
     public User connect(int userId, String countryName) throws Exception{
             User user = userRepository2.findById(userId).get();
 
-//        if(user.getMaskedIp()!=null){
-//            throw new Exception("Already connected");
-//        }
-//        else if(countryName.equalsIgnoreCase(user.getOriginalCountry().getCountryName().toString())){
-//            return user;
-//        }
-
-
-            if(user.getConnected()){
-                throw new Exception("Already connected");
-            }else if(user.getOriginalCountry().getCountryName().toString().equalsIgnoreCase(countryName)){
+        if(user.getMaskedIp()!=null){
+            throw new Exception("Already connected");
+        }
+        else if(countryName.equalsIgnoreCase(user.getOriginalCountry().getCountryName().toString())){
             return user;
-        }else {
+        }
+        else {
                 if (user.getServiceProviderList() == null) {
                     throw new Exception("Unable to connect");
                 }

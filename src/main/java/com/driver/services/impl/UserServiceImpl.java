@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
             userRepository3.save(user);
         }else{
-            throw new Exception("country not found");
+            throw new Exception("Country not found");
         }
 
        return user;
