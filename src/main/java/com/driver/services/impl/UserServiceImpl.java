@@ -26,37 +26,47 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(String username, String password, String countryName) throws Exception{
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        if(countryName.equalsIgnoreCase("IND") || countryName.equalsIgnoreCase("USA")|| countryName.equalsIgnoreCase("JPN")|| countryName.equalsIgnoreCase("AUS")|| countryName.equalsIgnoreCase("CHI")) {
+            user.setUsername(username);
+            user.setPassword(password);
 
-        Country country = new Country();
+            Country country = new Country();
 
-       if(countryName.equals(CountryName.AUS)){
-           country.setCountryName(CountryName.AUS);
-           country.setCode(CountryName.AUS.toCode());
-       }else if(countryName.equals(CountryName.CHI)){
-           country.setCountryName(CountryName.CHI);
-           country.setCode(CountryName.CHI.toCode());
-       }else if(countryName.equals(CountryName.IND)){
-           country.setCountryName(CountryName.IND);
-           country.setCode(CountryName.IND.toCode());
-       } else if (countryName.equals(CountryName.JPN)) {
-           country.setCountryName(CountryName.JPN);
-           country.setCode(CountryName.JPN.toCode());
-       }else {
-           country.setCountryName(CountryName.USA);
-           country.setCode(CountryName.USA.toCode());
-       }
+            if (countryName.equalsIgnoreCase(CountryName.AUS.toString())) {
+                country.setCountryName(CountryName.AUS);
+                country.setCode(CountryName.AUS.toCode());
+            }
+            if (countryName.equalsIgnoreCase(CountryName.CHI.toString())) {
+                country.setCountryName(CountryName.CHI);
+                country.setCode(CountryName.CHI.toCode());
+            }
+            if (countryName.equalsIgnoreCase(CountryName.IND.toString())) {
+                country.setCountryName(CountryName.IND);
+                country.setCode(CountryName.IND.toCode());
+            }
+            if (countryName.equalsIgnoreCase(CountryName.JPN.toString())) {
+                country.setCountryName(CountryName.JPN);
+                country.setCode(CountryName.JPN.toCode());
+            }
+            if (countryName.equalsIgnoreCase(CountryName.USA.toString())) {
+                country.setCountryName(CountryName.USA);
+                country.setCode(CountryName.USA.toCode());
+            }
 
-       user.setOriginalCountry(country);
-       int user_Id = user.getId();
-       int code = Integer.parseInt(country.getCode());
-       user.setOriginalIp(code +"."+user_Id);
 
-       user.setConnected(false);
-       user.setMaskedIp(null);
+            country.setUser(user);
+            user.setOriginalCountry(country);
+            int user_Id = user.getId();
+            String code = country.getCode();
+            user.setOriginalIp(code + "." + user_Id);
 
-        userRepository3.save(user);
+            user.setConnected(false);
+            user.setMaskedIp(null);
+
+            userRepository3.save(user);
+        }else{
+            throw new Exception("Country not found");
+        }
 
        return user;
     }
