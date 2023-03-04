@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
         List<ServiceProvider> serviceProviderList = user.getServiceProviderList();
         serviceProviderList.add(serviceProvider);
 
+        serviceProvider.getUsers().add(user);
         return user;
     }
 }

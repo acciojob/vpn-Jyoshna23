@@ -42,12 +42,16 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = adminRepository1.findById(adminId).get();
 
         ServiceProvider serviceProvider = new ServiceProvider();
+        serviceProvider.setAdmin(admin);
         serviceProvider.setName(providerName);
 
         List<ServiceProvider> serviceProviderList = admin.getServiceProviders();
         serviceProviderList.add(serviceProvider);
+        adminRepository1.save(admin);
         return admin;
     }
+
+
 
     @Override
     public ServiceProvider addCountry(int serviceProviderId, String countryName) throws Exception {
