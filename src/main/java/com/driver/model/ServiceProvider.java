@@ -10,7 +10,7 @@ public class ServiceProvider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceProviderId;
+    private int id;
 
     private String name;
 
@@ -29,11 +29,8 @@ public class ServiceProvider {
     List<Country> countryList = new ArrayList<>();
 
     //Many - Many relationship between User and Service Provider
-    @ManyToMany
-    @JoinTable(name = "serviceProviders_users",
-            joinColumns = @JoinColumn(name = "serviceProviderId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
-    private List<User> user = new ArrayList<>();
+    @ManyToMany(mappedBy = "serviceProviderList",cascade = CascadeType.ALL)
+    private List<User> users = new ArrayList<>();
 
 
 
@@ -41,7 +38,7 @@ public class ServiceProvider {
     }
 
     public ServiceProvider(int id, String name) {
-        this.serviceProviderId = serviceProviderId;
+        this.id = this.id;
         this.name = name;
     }
 
@@ -69,20 +66,20 @@ public class ServiceProvider {
         this.countryList = countryList;
     }
 
-    public List<User> getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(List<User> user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
-    public int getServiceProviderId() {
-        return serviceProviderId;
+    public int getId() {
+        return id;
     }
 
-    public void setServiceProviderId(int serviceProviderId) {
-        this.serviceProviderId = serviceProviderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

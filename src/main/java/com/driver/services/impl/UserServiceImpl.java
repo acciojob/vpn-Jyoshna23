@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
            country.setCode(CountryName.USA.toCode());
        }
 
-       user.setCountry(country);
-       int user_Id = user.getUserId();
+       user.setOriginalCountry(country);
+       int user_Id = user.getId();
        int code = Integer.parseInt(country.getCode());
        user.setOriginalIp(code +"."+user_Id);
 

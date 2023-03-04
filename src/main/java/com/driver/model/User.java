@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
 
     private String username;
 
@@ -23,9 +23,8 @@ public class User {
     private boolean connected;
 
     //Mapping the relationship between country and user
-    @OneToOne
-    @JoinColumn
-    private Country country;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Country originalCountry;
 
 
     //Between user and connecction
@@ -33,7 +32,8 @@ public class User {
     List<Connection> connectionList = new ArrayList<>();
 
     //between service provider and user
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany
+    @JoinColumn
     private List<ServiceProvider> serviceProviderList = new ArrayList<>();
 
 
@@ -43,7 +43,7 @@ public class User {
     }
 
     public User(int id, String username, String password, String originalIp, String maskedIp, boolean connected) {
-        this.userId = id;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.originalIp = originalIp;
@@ -51,12 +51,12 @@ public class User {
         this.connected = connected;
     }
 
-    public Country getCountry() {
-        return country;
+    public Country getOriginalCountry() {
+        return originalCountry;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setOriginalCountry(Country originalCountry) {
+        this.originalCountry = originalCountry;
     }
 
     public List<Connection> getConnectionList() {
@@ -75,12 +75,12 @@ public class User {
         this.serviceProviderList = serviceProviderList;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -115,7 +115,7 @@ public class User {
         this.maskedIp = maskedIp;
     }
 
-    public boolean isConnected() {
+    public boolean getConnected() {
         return connected;
     }
 

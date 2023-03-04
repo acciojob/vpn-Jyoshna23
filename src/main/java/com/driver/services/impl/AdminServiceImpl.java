@@ -44,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
         ServiceProvider serviceProvider = new ServiceProvider();
         serviceProvider.setName(providerName);
 
-        List<ServiceProvider> serviceProviderList = admin.getServiceProviderList();
+        List<ServiceProvider> serviceProviderList = admin.getServiceProviders();
         serviceProviderList.add(serviceProvider);
         return admin;
     }

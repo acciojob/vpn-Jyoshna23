@@ -24,7 +24,6 @@ public  class Country{
 
     //country and User
     @OneToOne
-    @JoinColumn
     private User user;
 
     public Country() {
