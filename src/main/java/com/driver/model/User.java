@@ -13,13 +13,9 @@ public class User {
     private int id;
 
     private String username;
-
     private String password;
-
     private String originalIp;
-
     private String maskedIp;
-
     private Boolean connected;
 
     //Mapping the relationship between country and user
@@ -115,7 +111,7 @@ public class User {
         this.maskedIp = maskedIp;
     }
 
-    public boolean getConnected() {
+    public Boolean getConnected() {
         return connected;
     }
 
