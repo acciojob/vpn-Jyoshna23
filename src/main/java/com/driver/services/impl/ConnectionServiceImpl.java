@@ -23,9 +23,17 @@ public class ConnectionServiceImpl implements ConnectionService {
     public User connect(int userId, String countryName) throws Exception{
             User user = userRepository2.findById(userId).get();
 
+//        if(user.getMaskedIp()!=null){
+//            throw new Exception("Already connected");
+//        }
+//        else if(countryName.equalsIgnoreCase(user.getOriginalCountry().getCountryName().toString())){
+//            return user;
+//        }
+
+
             if(user.getConnected()){
                 throw new Exception("Already connected");
-            }else if(user.getOriginalCountry().getCountryName().toString().equals(countryName)){
+            }else if(user.getOriginalCountry().getCountryName().toString().equalsIgnoreCase(countryName)){
             return user;
         }else {
                 if (user.getServiceProviderList() == null) {
@@ -92,7 +100,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         User sender = userRepository2.findById(senderId).get();
         User receiver = userRepository2.findById(receiverId).get();
 
-       if(receiver.getConnected()){
+       if(!sender.getConnected()){
            String receiverCurrentCountry = receiver.getOriginalCountry().toString();
            if(sender.getOriginalCountry().toString().equals(receiverCurrentCountry)){
                //sender is already in the same country no need to connect vpn
@@ -133,40 +141,8 @@ public class ConnectionServiceImpl implements ConnectionService {
                serviceProviderRepository2.save(serviceProvider);
            }
 
-
-
        }
         return sender;
     }
 }
 
-
-//
-//    List<ServiceProvider> serviceProviderList = user.getServiceProviderList();
-//    List<User> userList;
-//            for(ServiceProvider serviceProvider : serviceProviderList){
-//        userList = serviceProvider.getUser();
-//        for(User users : userList) {
-//            if (users.getUserId() == userId) {
-//                throw new Exception("Already connected exception");
-//            }
-//        }
-//    }
-//
-//    CountryName userCountryName = user.getCountry().getCountryName();
-//            if(userCountryName.toString().equals(countryName)){
-//
-//    }
-//
-//            for(ServiceProvider serviceProvider :serviceProviderList){
-//        userList = serviceProvider.getUser();
-//        for(User users : userList) {
-//            if (users.getUserId() == userId) {
-//                List<Country> countryList = serviceProvider.getCountryList();
-//                for(Country country : countryList){
-//                    if(country.getCountryName().equals(countryName)){
-//                        Connection connection = new Connection();
-//                        user.setMaskedIp();
-//                    }
-//                }
-//            }
