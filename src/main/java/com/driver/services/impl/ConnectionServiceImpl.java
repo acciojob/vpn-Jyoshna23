@@ -40,8 +40,9 @@ public class ConnectionServiceImpl implements ConnectionService {
                 Country country = null;
 
                 for(ServiceProvider serviceProvider1 : serviceProviderList){
-                    for(Country country1 : serviceProvider1.getCountryList()){
-                        if(country1.getCountryName().toString().equals(countryName) && id > serviceProvider1.getId()){
+                    List<Country> countryList = serviceProvider1.getCountryList();
+                     for(Country country1 : countryList){
+                        if(countryName.equalsIgnoreCase(country1.getCountryName().toString()) && id > serviceProvider1.getId()){
                             id = serviceProvider1.getId();
                             country = country1;
                             serviceProvider = serviceProvider1;
@@ -91,7 +92,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         User sender = userRepository2.findById(senderId).get();
         User receiver = userRepository2.findById(receiverId).get();
 
-        if(receiver.getConnected()) {
+        if(receiver.getMaskedIp() != null) {
             String receiverCurrentCountry = receiver.getMaskedIp();
 
             String code = receiverCurrentCountry.substring(0, 3);
@@ -121,22 +122,22 @@ public class ConnectionServiceImpl implements ConnectionService {
                 // sender needs to connect to suitable vpn
                 User sender1 = connect(senderId, countryName);
 
-            if (!sender1.getConnected()) {
-                throw new Exception("Cannot establish communication");
-            } else {
-                return sender1;
-            }
-        }
+                if (!sender1.getConnected()) {
+                    throw new Exception("Cannot establish communication");
+                } else {
+                    return sender1;
+                }
+             }
         }else{
             if(receiver.getOriginalCountry().equals(sender.getOriginalCountry())){
                 return sender;
             }
             String countryName = receiver.getOriginalCountry().getCountryName().toString();
-            User user2 =  connect(senderId,countryName);
-            if (!user2.getConnected()){
+            User sender1 =  connect(senderId,countryName);
+            if (!sender1.getConnected()){
                 throw new Exception("Cannot establish communication");
             }
-            else return user2;
+            else return sender1;
         }
     }
 }
