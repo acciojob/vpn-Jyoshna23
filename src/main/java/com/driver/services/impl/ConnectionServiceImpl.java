@@ -96,7 +96,7 @@ public class ConnectionServiceImpl implements ConnectionService {
             String receiverCurrentCountry = receiver.getMaskedIp();
 
             String code = receiverCurrentCountry.substring(0, 3);
-            if (code.equals(receiver.getOriginalCountry().getCode())) {
+            if (code.equals(sender.getOriginalCountry().getCode())) {
                 //sender is already in the same country no need to connect vpn
                 return sender;
             } else {
