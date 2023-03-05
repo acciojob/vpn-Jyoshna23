@@ -122,9 +122,11 @@ public class ConnectionServiceImpl implements ConnectionService {
                 // sender needs to connect to suitable vpn
                 User sender1 = connect(senderId, countryName);
 
-                if (!sender1.getConnected()) {
-                    throw new Exception("Cannot establish communication");
-                } else return sender1;
+//                if (!sender1.getConnected()) {
+//                    throw new Exception("Cannot establish communication");
+//                } else
+//
+                return sender1;
 
              }
         }else{
