@@ -120,13 +120,12 @@ public class ConnectionServiceImpl implements ConnectionService {
 
 
                 // sender needs to connect to suitable vpn
-                User sender1 = connect(senderId, countryName);
+                User user2 = connect(senderId, countryName);
 
-//                if (!sender1.getConnected()) {
-//                    throw new Exception("Cannot establish communication");
-//                } else
-//
-                return sender1;
+                if (!user2.getConnected()){
+                    throw new Exception("Cannot establish communication");
+                }
+                else return user2;
 
              }
         }else{
@@ -134,11 +133,11 @@ public class ConnectionServiceImpl implements ConnectionService {
                 return sender;
             }
             String countryName = receiver.getOriginalCountry().getCountryName().toString();
-            User sender1 =  connect(senderId,countryName);
-            if (!sender1.getConnected()){
+            User user2 =  connect(senderId,countryName);
+            if (!user2.getConnected()){
                 throw new Exception("Cannot establish communication");
             }
-            else return sender1;
+            else return user2;
         }
     }
 }
