@@ -124,9 +124,8 @@ public class ConnectionServiceImpl implements ConnectionService {
 
                 if (!sender1.getConnected()) {
                     throw new Exception("Cannot establish communication");
-                } else {
-                    return sender1;
-                }
+                } else return sender1;
+
              }
         }else{
             if(receiver.getOriginalCountry().equals(sender.getOriginalCountry())){
