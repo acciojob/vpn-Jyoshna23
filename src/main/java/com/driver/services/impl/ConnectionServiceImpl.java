@@ -102,19 +102,19 @@ public class ConnectionServiceImpl implements ConnectionService {
             } else {
                 String countryName = "";
 
-                if (code.equalsIgnoreCase(CountryName.IND.toString())) {
+                if (code.equalsIgnoreCase(CountryName.IND.toCode())) {
                     countryName = CountryName.IND.toString();
                 }
-                if (code.equalsIgnoreCase(CountryName.USA.toString())) {
+                if (code.equalsIgnoreCase(CountryName.USA.toCode())) {
                     countryName = CountryName.USA.toString();
                 }
-                if (code.equalsIgnoreCase(CountryName.AUS.toString())) {
+                if (code.equalsIgnoreCase(CountryName.AUS.toCode())) {
                     countryName = CountryName.AUS.toString();
                 }
-                if (code.equalsIgnoreCase(CountryName.CHI.toString())) {
+                if (code.equalsIgnoreCase(CountryName.CHI.toCode())) {
                     countryName = CountryName.CHI.toString();
                 }
-                if (code.equalsIgnoreCase(CountryName.JPN.toString())) {
+                if (code.equalsIgnoreCase(CountryName.JPN.toCode())) {
                     countryName = CountryName.JPN.toString();
                 }
 
